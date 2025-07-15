@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>てすと</title>
+    </head>
+    <body>
+        <h1>【Python】Djangoで遊ぶ</h1>
+        <form action="{% url 'myapp:pointget' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Selenium実行</button>
+        </form>
+    </body>
+</html>
