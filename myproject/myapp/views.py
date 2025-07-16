@@ -2,12 +2,16 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
-from .App import run_selenium_script
-from .tests import test_selenium_script
+from .daypoint import run_selenium_script
+from .readpoint import readpoint_get
 
 
 def pointget(request):
-    run_selenium_script
+    run_selenium_script()
+    return HttpResponse("Seleniumスクリプトを実行しました。")
+
+def pointget2(request):
+    readpoint_get()
     return HttpResponse("Seleniumスクリプトを実行しました。")
 
 def index(request):

@@ -13,14 +13,13 @@ def run_selenium_script():
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
     options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}') 
-    
-    
-
-    # Chromeドラ
-    # driver = webdriver.Chrome()
-    
     # ← ヘッドレスオプションを反映させる！
     driver = webdriver.Chrome(options=options)
+    
+
+    # Chromeドライバー
+    # driver = webdriver.Chrome()
+    
 
     # ログインページにアクセス
     driver.get("https://pointi.jp/entrance.php")
@@ -51,13 +50,8 @@ def run_selenium_script():
     elements = driver.find_elements(By.CSS_SELECTOR, ".go_btn")
     text = "クリックで1pt"
 
-
-
     for i, element in enumerate(elements):
         if element.text ==  text:
             print(f"{i}番目: {element.text}")
             element.click()
             time.sleep(2)
-            
-            
-            

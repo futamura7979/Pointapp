@@ -7,7 +7,14 @@
         <h1>ポイントをゲットする!</h1>
         <form action="{% url 'myapp:pointget' %}" method="post">
             {% csrf_token %}
-            <button type="submit">Selenium実行</button>
+            <button type="submit">毎日ログインポイントゲット</button>
+        </form>
+
+        <br>
+
+        <form action="{% url 'myapp:pointget2' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">読むだけポイントゲット</button>
         </form>
     </body>
 </html>
