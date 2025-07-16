@@ -16,7 +16,7 @@ def run_selenium_script():
     
     
 
-    # Chromeドライバーを起動
+    # Chromeドラ
     # driver = webdriver.Chrome()
     
     # ← ヘッドレスオプションを反映させる！

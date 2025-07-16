@@ -7,7 +7,7 @@ from .tests import test_selenium_script
 
 
 def pointget(request):
-    test_selenium_script()
+    run_selenium_script
     return HttpResponse("Seleniumスクリプトを実行しました。")
 
 def index(request):
