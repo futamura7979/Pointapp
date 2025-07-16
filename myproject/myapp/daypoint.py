@@ -13,6 +13,11 @@ def run_selenium_script():
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
     
+    
+    # ✅ 一意なプロファイルディレクトリを毎回作成
+    temp_profile_dir = tempfile.mkdtemp()
+    options.add_argument(f'--user-data-dir={temp_profile_dir}')
+    
     # ← ヘッドレスオプションを反映させる！
     driver = webdriver.Chrome(options=options)
     
