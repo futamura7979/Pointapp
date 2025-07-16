@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
+import tempfile 
 
 from selenium.common.exceptions import NoSuchElementException
 
@@ -11,6 +12,7 @@ def run_selenium_script():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
+    options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}') 
     
     
 
