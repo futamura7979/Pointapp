@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-hs(ju25wa9ii%_i=uiwcilepj@eruo2*@1_0xs01etb6791u0h
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # 'futamura.pythonanywhere.com',
+    'futamura.pythonanywhere.com', 'localhost', '127.0.0.1'
 ]
 
 
