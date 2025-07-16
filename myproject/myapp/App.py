@@ -11,6 +11,8 @@ def run_selenium_script():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
+    
+    
 
     # Chromeドライバーを起動
     # driver = webdriver.Chrome()
