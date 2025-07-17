@@ -13,17 +13,15 @@ def run_selenium_script():
     
     # Chromeオプション設定
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # ヘッドレスモード
+    # options.add_argument('--headless')  # ヘッドレスモード
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    # options.add_argument('--window-size=1920,1080')
     options.add_argument('--window-size=800,600')
     # options.add_argument(f'--user-data-dir={tmpdirname}')  # 毎回ユニークなディレクトリを使う
     
-    print("エラー５")
     driver = webdriver.Chrome(options=options)
     
-    print("セレニウムヘッドレスモード")
+    print("ドライバー読み込み完了")
     # Chromeドライバー
     #driver = webdriver.Chrome()
     
