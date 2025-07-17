@@ -25,8 +25,8 @@ def run_selenium_script():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
-    tmpdirname = tempfile.mkdtemp()
-    options.add_argument(f'--user-data-dir={tmpdirname}')
+    # tmpdirname = tempfile.mkdtemp()
+    # options.add_argument(f'--user-data-dir={tmpdirname}')
     
     print("エラー５")
     driver = webdriver.Chrome(options=options)
