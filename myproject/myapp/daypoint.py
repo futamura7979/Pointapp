@@ -11,7 +11,6 @@ from selenium.common.exceptions import NoSuchElementException
 def run_selenium_script():
     print("セレニウム起動完了")
     
-
     # 古い一時ディレクトリ削除
     for d in glob.glob("/tmp/selenium_*"):
         try:
@@ -19,14 +18,17 @@ def run_selenium_script():
         except Exception as e:
             print(f"削除失敗: {d} - {e}")
     
-    # 一時ディレクトリ作成
+    # ✅ 新しい一時ディレクトリ作成
+    tmpdirname = tempfile.mkdtemp(prefix="selenium_")
+    print(f"使用する一時ディレクトリ: {tmpdirname}")
+    
+    # Chromeオプション設定
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # ヘッドレスモード
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
-    # tmpdirname = tempfile.mkdtemp()
-    # options.add_argument(f'--user-data-dir={tmpdirname}')
+    options.add_argument('--window-size=1920,1080')
+    options.add_argument(f'--user-data-dir={tmpdirname}')  # 毎回ユニークなディレクトリを使う
     
     print("エラー５")
     driver = webdriver.Chrome(options=options)
