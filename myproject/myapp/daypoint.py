@@ -12,10 +12,14 @@ def run_selenium_script():
     
     # 一時ディレクトリ作成
     tmpdirname = tempfile.mkdtemp()
+    print("エラー１")
     
     options = webdriver.ChromeOptions()
+    print("エラー２")
     options.add_argument('--headless')  # ヘッドレスモード
+    print("エラー４")
     options.add_argument('--no-sandbox')
+    print("エラー５")
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
     
