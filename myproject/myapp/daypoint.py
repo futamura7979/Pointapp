@@ -55,7 +55,9 @@ def login(driver1):
     
     driver = driver1
     # ログインページにアクセス
+    print("pointi.jpへアクセス開始")
     driver.get("https://pointi.jp/entrance.php")
+    print("pointi.jpへアクセス終了")
     
     # name=passとname=pass の属性をとって入力 
     email_input = driver.find_element(By.NAME, "email_address")
