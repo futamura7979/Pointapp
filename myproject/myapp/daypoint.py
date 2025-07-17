@@ -3,29 +3,59 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 import tempfile 
+import shutil 
 
 from selenium.common.exceptions import NoSuchElementException
 
 def run_selenium_script():
+    print("セレニウム起動完了")
+    
+    # 一時ディレクトリ作成
+    tmpdirname = tempfile.mkdtemp()
+    
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # ヘッドレスモード
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
+    options.add_argument(f'--user-data-dir={tmpdirname}') 
     
-    
-    # ✅ 一意なプロファイルディレクトリを毎回作成
-    temp_profile_dir = tempfile.mkdtemp()
-    options.add_argument(f'--user-data-dir={temp_profile_dir}')
-    
-    # ← ヘッドレスオプションを反映させる！
     driver = webdriver.Chrome(options=options)
     
-
+    
     # Chromeドライバー
-    # driver = webdriver.Chrome()
+    #driver = webdriver.Chrome()
+    
+    # ログイン
+    login(driver)
+    
+    #タイトル
+    title = "毎日クリック"
+    element = driver.find_element(By.XPATH, f'//span[text()="{title}"]')
+    element.click()
     
 
+    elements = driver.find_elements(By.CSS_SELECTOR, ".go_btn")
+    text = "クリックで1pt"
+
+    for i, element in enumerate(elements):
+        if element.text ==  text:
+            print(f"{i}番目: {element.text}")
+            element.click()
+            time.sleep(2)
+    
+    #ドライバーシャットダウン
+    driver.quit()
+    print("ドライバーシャットダウン完了")
+    
+    # `try` を使わない代わりに、必ず最後に明示削除
+    shutil.rmtree(tmpdirname)  
+
+
+def login(driver1):
+    print("ログイン開始")
+    
+    driver = driver1
     # ログインページにアクセス
     driver.get("https://pointi.jp/entrance.php")
 
@@ -46,17 +76,4 @@ def run_selenium_script():
 
     close_button = driver.find_element(By.ID, "cboxClose")
     close_button.click()
-
-
-    element = driver.find_element(By.XPATH, '//span[text()="毎日クリック"]')
-    element.click()
-
-
-    elements = driver.find_elements(By.CSS_SELECTOR, ".go_btn")
-    text = "クリックで1pt"
-
-    for i, element in enumerate(elements):
-        if element.text ==  text:
-            print(f"{i}番目: {element.text}")
-            element.click()
-            time.sleep(2)
+    print("ログイン完了")
