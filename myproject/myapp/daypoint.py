@@ -1,21 +1,33 @@
-import time
-import tempfile
-import shutil
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+import time
+import tempfile 
+import shutil 
+import glob, shutil
+
+from selenium.common.exceptions import NoSuchElementException
 
 def run_selenium_script():
-    # 毎回異なる user-data-dir を作成
-    tmp_dir = tempfile.mkdtemp(prefix='selenium_')
+    print("セレニウム起動完了")
+    
 
-    options = Options()
-    options.add_argument('--headless')
+    # 古い一時ディレクトリ削除
+    for d in glob.glob("/tmp/selenium_*"):
+        try:
+            shutil.rmtree(d)
+        except Exception as e:
+            print(f"削除失敗: {d} - {e}")
+    
+    # 一時ディレクトリ作成
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')  # ヘッドレスモード
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    options.add_argument(f'--user-data-dir={tmp_dir}')
-
+    options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
+    tmpdirname = tempfile.mkdtemp()
+    options.add_argument(f'--user-data-dir={tmpdirname}')
+    
     print("エラー５")
     driver = webdriver.Chrome(options=options)
     
