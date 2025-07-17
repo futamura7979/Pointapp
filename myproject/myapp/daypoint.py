@@ -13,13 +13,13 @@ def run_selenium_script():
     print("セレニウム起動完了")
     
     # 一時ディレクトリ作成
-    tmpdirname = tempfile.mkdtemp()
-    options.add_argument(f'--user-data-dir={tmpdirname}')
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # ヘッドレスモード
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
+    tmpdirname = tempfile.mkdtemp()
+    options.add_argument(f'--user-data-dir={tmpdirname}')
     
     print("エラー５")
     driver = webdriver.Chrome(options=options)
