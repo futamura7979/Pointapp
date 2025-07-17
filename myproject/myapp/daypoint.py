@@ -8,51 +8,42 @@ import shutil
 from selenium.common.exceptions import NoSuchElementException
 
 def run_selenium_script():
-    tmpdirname = tempfile.mkdtemp()
-    shutil.rmtree(tmpdirname)
-    print("セレニウム起動完了")
-    
-    # 一時ディレクトリ作成
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # ヘッドレスモード
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
-    tmpdirname = tempfile.mkdtemp()
-    options.add_argument(f'--user-data-dir={tmpdirname}')
-    
-    print("エラー５")
-    driver = webdriver.Chrome(options=options)
-    
-    print("セレニウムヘッドレスモード")
-    # Chromeドライバー
-    #driver = webdriver.Chrome()
-    
-    # ログイン
-    login(driver)
-    
-    #タイトル
-    title = "毎日クリック"
-    element = driver.find_element(By.XPATH, f'//span[text()="{title}"]')
-    element.click()
-    
+    tmpdirname = tempfile.mkdtemp()  # ここで1回だけ作る
+    print(f"セレニウム用一時ディレクトリ: {tmpdirname}")
 
-    elements = driver.find_elements(By.CSS_SELECTOR, ".go_btn")
-    text = "クリックで1pt"
+    try:
+        # Chromeオプション設定
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--window-size=1920,1080')
+        options.add_argument(f'--user-data-dir={tmpdirname}')
 
-    for i, element in enumerate(elements):
-        if element.text ==  text:
-            print(f"{i}番目: {element.text}")
-            element.click()
-            time.sleep(2)
-    
-    #ドライバーシャットダウン
-    driver.quit()
-    print("ドライバーシャットダウン完了")
-    
-    # `try` を使わない代わりに、必ず最後に明示削除
-    shutil.rmtree(tmpdirname)  
+        print("エラー５直前")
+        driver = webdriver.Chrome(options=options)
+        print("セレニウムヘッドレスモード起動")
 
+        login(driver)
+
+        title = "毎日クリック"
+        element = driver.find_element(By.XPATH, f'//span[text()="{title}"]')
+        element.click()
+
+        elements = driver.find_elements(By.CSS_SELECTOR, ".go_btn")
+        for i, element in enumerate(elements):
+            if element.text == "クリックで1pt":
+                print(f"{i}番目: {element.text}")
+                element.click()
+                time.sleep(2)
+
+        driver.quit()
+        print("ドライバーシャットダウン完了")
+
+    finally:
+        # エラーの有無に関係なく一時ディレクトリを削除
+        shutil.rmtree(tmpdirname)
+        print(f"一時ディレクトリ {tmpdirname} を削除しました")
 
 def login(driver1):
     print("ログイン開始")
