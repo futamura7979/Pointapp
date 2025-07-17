@@ -8,6 +8,7 @@ import shutil
 from selenium.common.exceptions import NoSuchElementException
 
 def run_selenium_script():
+    tmpdirname = tempfile.mkdtemp()
     shutil.rmtree(tmpdirname)
     print("セレニウム起動完了")
     
