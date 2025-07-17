@@ -8,25 +8,19 @@ import shutil
 from selenium.common.exceptions import NoSuchElementException
 
 def run_selenium_script():
+    shutil.rmtree(tmpdirname)
     print("セレニウム起動完了")
     
     # 一時ディレクトリ作成
     tmpdirname = tempfile.mkdtemp()
-    print("エラー１")
-    
+    options.add_argument(f'--user-data-dir={tmpdirname}')
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # ヘッドレスモード
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    print("エラー２")
     options.add_argument('--window-size=1920,1080')  # ウィンドウサイズ拡張
-    print("エラー３")
-    # 一時的なユーザーデータディレクトリを作成
-    tmpdirname = tempfile.mkdtemp()
-    print("エラー４")
-    options.add_argument(f'--user-data-dir={tmpdirname}')
-    print("エラー５")
     
+    print("エラー５")
     driver = webdriver.Chrome(options=options)
     
     print("セレニウムヘッドレスモード")
