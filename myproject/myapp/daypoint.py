@@ -19,6 +19,10 @@ def run_selenium_script():
     options.add_argument('--window-size=800,600')
     # options.add_argument(f'--user-data-dir={tmpdirname}')  # 毎回ユニークなディレクトリを使う
     
+    # ← PC風のUser-Agentを偽装
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
+
+    
     driver = webdriver.Chrome(options=options)
     
     print("ドライバー読み込み完了")
@@ -42,6 +46,8 @@ def run_selenium_script():
             print(f"{i}番目: {element.text}")
             element.click()
             time.sleep(2)
+        else:
+            print(f"{i}番目:獲得済み {element.text}")
     
     #ドライバーシャットダウン
     driver.quit()
