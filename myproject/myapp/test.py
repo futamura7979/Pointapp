@@ -7,6 +7,6 @@ def start(getpoint1):
 
         scheduler = BackgroundScheduler()
         
-        scheduler.add_job(getpoint1, 'interval', seconds=200) # schedule
+        scheduler.add_job(getpoint1, 'interval', seconds=500) # schedule
         scheduler.start()
         

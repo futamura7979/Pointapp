@@ -6,6 +6,6 @@ class MyappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'myapp'
     
-    def ready(self):
-        start(run_selenium_script)
+    # def ready(self):
+    #     start(run_selenium_script)
     
