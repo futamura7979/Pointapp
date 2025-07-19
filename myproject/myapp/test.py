@@ -1,12 +1,11 @@
-from datetime import datetime
+import schedule
+import time
+import multiprocessing
 
-from apscheduler.schedulers.background import BackgroundScheduler
+def selenium_job(getpoint):
+    
+    schedule.every(3).minutes.do(getpoint)
 
-
-def start(getpoint1):
-
-        scheduler = BackgroundScheduler()
-        
-        scheduler.add_job(getpoint1, 'interval', minutes=3)
-        scheduler.start()
-        
+    while True:
+        schedule.run_pending()
+        time.sleep(1)

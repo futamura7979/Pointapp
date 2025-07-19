@@ -1,11 +1,10 @@
 from django.apps import AppConfig
-from .test import start
+from .test import selenium_job
 from .daypoint import run_selenium_script,login
 
 class MyappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'myapp'
     
-    def ready(self):
-        start(run_selenium_script)
+    selenium_job(run_selenium_script)
     
