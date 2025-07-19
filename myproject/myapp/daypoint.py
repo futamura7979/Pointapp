@@ -9,25 +9,18 @@ import glob, shutil
 from selenium.common.exceptions import NoSuchElementException
 
 def run_selenium_script():
-    print("セレニウム起動完了")
-    
     # Chromeオプション設定
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # ヘッドレスモード
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=800,600')
-    # options.add_argument(f'--user-data-dir={tmpdirname}')  # 毎回ユニークなディレクトリを使う
     
-    # ← PC風のUser-Agentを偽装
+    # ← PC風のUser-Agentを偽装してiosで動くように
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
-
     
     driver = webdriver.Chrome(options=options)
-    
     print("ドライバー読み込み完了")
-    # Chromeドライバー
-    #driver = webdriver.Chrome()
     
     # ログイン
     login(driver)
@@ -37,10 +30,9 @@ def run_selenium_script():
     element = driver.find_element(By.XPATH, f'//span[text()="{title}"]')
     element.click()
     
-
     elements = driver.find_elements(By.CSS_SELECTOR, ".go_btn")
     text = "クリックで1pt"
-
+    
     for i, element in enumerate(elements):
         if element.text ==  text:
             print(f"{i}番目: {element.text}")
@@ -49,10 +41,8 @@ def run_selenium_script():
         else:
             print(f"{i}番目:獲得済み {element.text}")
     
-    #ドライバーシャットダウン
     driver.quit()
     print("ドライバーシャットダウン完了")
-    
 
 
 
@@ -81,3 +71,4 @@ def login(driver1):
     close_button = driver.find_element(By.ID, "cboxClose")
     close_button.click()
     print("ログイン完了")
+    
